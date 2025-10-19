@@ -1,0 +1,30 @@
+{
+    // Exclude build and external directories from file watcher
+    "files.watcherExclude": {
+        "**/build/**": true,
+        "**/external/**": true,
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true
+    },
+
+    // Exclude from search
+    "search.exclude": {
+        "**/build/**": true,
+        "**/external/**": true,
+        "**/.git": true
+    },
+
+    // Exclude from file explorer
+    "files.exclude": {
+        "**/.git": false,  // Show main .git
+        "**/build/**/.git": true,  // Hide nested .git in build
+        "**/external/**/.git": true  // Hide nested .git in external
+    },
+
+    // Git: Ignore repositories in these paths
+    "git.ignoredRepositories": [
+        "build",
+        "external"
+    ]
+}
