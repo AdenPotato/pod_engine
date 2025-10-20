@@ -22,6 +22,10 @@ void Renderer::setViewport(int x, int y, int width, int height) {
 }
 
 void Renderer::drawMesh(const Mesh& mesh, const Shader& shader, const glm::mat4& model, const Camera& camera, float aspectRatio) {
+    drawMesh(mesh, shader, model, camera, aspectRatio, nullptr);
+}
+
+void Renderer::drawMesh(const Mesh& mesh, const Shader& shader, const glm::mat4& model, const Camera& camera, float aspectRatio, const Texture* texture) {
     shader.use();
 
     // Set transformation matrices
@@ -31,6 +35,15 @@ void Renderer::drawMesh(const Mesh& mesh, const Shader& shader, const glm::mat4&
     shader.setMat4("projection", projection);
     shader.setMat4("view", view);
     shader.setMat4("model", model);
+
+    // Handle texture if provided
+    if (texture && texture->isLoaded()) {
+        texture->bind(0);
+        shader.setInt("texture1", 0);
+        shader.setBool("useTexture", true);
+    } else {
+        shader.setBool("useTexture", false);
+    }
 
     mesh.draw();
 }

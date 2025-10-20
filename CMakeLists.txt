@@ -100,6 +100,7 @@ set(ENGINE_SOURCES
     src/shader/shader.cpp
     src/camera/camera.cpp
     src/mesh/mesh.cpp
+    src/texture/texture.cpp
     src/imgui_layer/imgui_layer.cpp
 )
 
@@ -110,6 +111,7 @@ set(ENGINE_HEADERS
     src/shader/shader.h
     src/camera/camera.h
     src/mesh/mesh.h
+    src/texture/texture.h
     src/imgui_layer/imgui_layer.h
 )
 
@@ -125,6 +127,7 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/src/shader
         ${CMAKE_CURRENT_SOURCE_DIR}/src/camera
         ${CMAKE_CURRENT_SOURCE_DIR}/src/mesh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/texture
         ${CMAKE_CURRENT_SOURCE_DIR}/src/imgui_layer
         ${stb_SOURCE_DIR}
 )

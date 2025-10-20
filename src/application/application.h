@@ -5,6 +5,7 @@
 #include "camera.h"
 #include "shader.h"
 #include "mesh.h"
+#include "texture.h"
 #include "imgui_layer.h"
 #include <memory>
 #include <vector>

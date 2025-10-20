@@ -5,6 +5,7 @@
 #include "shader.h"
 #include "mesh.h"
 #include "camera.h"
+#include "texture.h"
 
 class Renderer {
 public:
@@ -16,6 +17,7 @@ public:
 
     // Rendering methods
     void drawMesh(const Mesh& mesh, const Shader& shader, const glm::mat4& model, const Camera& camera, float aspectRatio);
+    void drawMesh(const Mesh& mesh, const Shader& shader, const glm::mat4& model, const Camera& camera, float aspectRatio, const Texture* texture);
 
     // State management
     void enableDepthTest(bool enable = true);
