@@ -54,3 +54,6 @@ Thumbs.db
 *.tmp
 *.temp
 *.bak
+
+#assets (not licensed lol)
+assets/*
