@@ -19,7 +19,7 @@ const float YAW = -90.0f;
 const float PITCH = 0.0f;
 const float SPEED = 2.5f;
 const float SENSITIVITY = 0.1f;
-const float FOV = 45.0f;
+const float FOV = 90.0f;
 
 // A camera class for handling FPS-style camera movement
 class Camera {
@@ -61,7 +61,7 @@ public:
     // Processes input received from a mouse scroll-wheel event
     void processMouseScroll(float yoffset);
 
-private:
+private: 
     // Calculates the front vector from the Camera's Euler Angles
     void updateCameraVectors();
 };

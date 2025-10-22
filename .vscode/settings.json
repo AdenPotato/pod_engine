@@ -26,5 +26,11 @@
     "git.ignoredRepositories": [
         "build",
         "external"
-    ]
+    ],
+    "files.associations": {
+        "vector": "cpp",
+        "memory": "cpp",
+        "type_traits": "cpp",
+        "xtr1common": "cpp"
+    }
 }
