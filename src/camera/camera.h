@@ -49,6 +49,9 @@ public:
     // Returns the view matrix calculated using Euler Angles and the LookAt Matrix
     glm::mat4 getViewMatrix() const;
 
+    // Returns the projection matrix
+    glm::mat4 getProjectionMatrix(float aspectRatio) const;
+
     // Processes input received from any keyboard-like input system
     void processKeyboard(Camera_Movement direction, float deltaTime);
 

@@ -102,6 +102,7 @@ set(ENGINE_SOURCES
     src/mesh/mesh.cpp
     src/texture/texture.cpp
     src/imgui_layer/imgui_layer.cpp
+    src/voxel/voxel_grid.cpp
 )
 
 set(ENGINE_HEADERS
@@ -113,6 +114,7 @@ set(ENGINE_HEADERS
     src/mesh/mesh.h
     src/texture/texture.h
     src/imgui_layer/imgui_layer.h
+    src/voxel/voxel_grid.h
 )
 
 # Create executable
@@ -129,6 +131,7 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/src/mesh
         ${CMAKE_CURRENT_SOURCE_DIR}/src/texture
         ${CMAKE_CURRENT_SOURCE_DIR}/src/imgui_layer
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/voxel
         ${stb_SOURCE_DIR}
 )
 

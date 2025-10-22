@@ -14,8 +14,14 @@ public:
     // Constructor reads and builds the shader
     Shader(const char* vertexPath, const char* fragmentPath);
 
+    // Compute shader constructor
+    Shader(const char* computePath);
+
     // Activate the shader
     void use() const;
+
+    // Dispatch compute shader
+    void dispatch(unsigned int numGroupsX, unsigned int numGroupsY, unsigned int numGroupsZ) const;
 
     // Utility uniform functions
     void setBool(const std::string& name, bool value) const;

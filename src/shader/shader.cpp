@@ -63,8 +63,58 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath) {
     glDeleteShader(fragment);
 }
 
+Shader::Shader(const char* computePath) {
+    // 1. Retrieve the compute shader source code from filePath
+    std::string computeCode;
+    std::ifstream cShaderFile;
+
+    // Ensure ifstream object can throw exceptions
+    cShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+    try {
+        // Open file
+        cShaderFile.open(computePath);
+        std::stringstream cShaderStream;
+
+        // Read file's buffer contents into stream
+        cShaderStream << cShaderFile.rdbuf();
+
+        // Close file handler
+        cShaderFile.close();
+
+        // Convert stream into string
+        computeCode = cShaderStream.str();
+    }
+    catch (std::ifstream::failure& e) {
+        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
+    }
+
+    const char* cShaderCode = computeCode.c_str();
+
+    // 2. Compile compute shader
+    unsigned int compute;
+
+    compute = glCreateShader(GL_COMPUTE_SHADER);
+    glShaderSource(compute, 1, &cShaderCode, NULL);
+    glCompileShader(compute);
+    checkCompileErrors(compute, "COMPUTE");
+
+    // Shader Program
+    ID = glCreateProgram();
+    glAttachShader(ID, compute);
+    glLinkProgram(ID);
+    checkCompileErrors(ID, "PROGRAM");
+
+    // Delete the shader as it's linked into our program now and no longer necessary
+    glDeleteShader(compute);
+}
+
 void Shader::use() const {
     glUseProgram(ID);
+}
+
+void Shader::dispatch(unsigned int numGroupsX, unsigned int numGroupsY, unsigned int numGroupsZ) const {
+    glDispatchCompute(numGroupsX, numGroupsY, numGroupsZ);
 }
 
 void Shader::setBool(const std::string& name, bool value) const {

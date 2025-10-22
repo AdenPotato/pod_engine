@@ -33,6 +33,9 @@ public:
 
     void draw() const;
 
+    // Get VAO handle
+    unsigned int getVAO() const { return m_VAO; }
+
     // Factory methods for common shapes
     static Mesh createCube();
     static Mesh createPlane(float size = 1.0f);
