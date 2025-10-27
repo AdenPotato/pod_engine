@@ -1,0 +1,8 @@
+Name: Glock21
+Class: 2
+Type: Hitscan
+Palette: Custom\Doom
+Summon: Glock21
+Ammo Type: Clip
+Altfire: No
+Powered Mode: No

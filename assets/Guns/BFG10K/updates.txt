@@ -1,0 +1,11 @@
+10/30/2016 - Blue Shadow
+- Fixed a typo in GLDEFS which resulted in an error on start-up when using the OpenGL renderer.
+
+04/07/2019 - Ghastly
+- Removed an Obituary reference to a missing Language lump. It was unnecessary anyway because the
+  weapon has a working obituary.
+- ZScriptification
+
+Oct 13th, 2023 - Gothic
+- New sprites by SoniK.O.Fan.
+- Changed wad format to pk3.

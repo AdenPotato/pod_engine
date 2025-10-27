@@ -1,0 +1,365 @@
+BrightMap Sprite ARBRA1D1
+{
+Map "Brightmaps/Arachnobaron/BMARBRA1"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRA2A8
+{
+Map "Brightmaps/Arachnobaron/BMARBRA2"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRA3A7
+{
+Map "Brightmaps/Arachnobaron/BMARBRA3"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRA4A6
+{
+Map "Brightmaps/Arachnobaron/BMARBRA4"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRA5D5
+{
+Map "Brightmaps/Arachnobaron/BMARBRA5"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRB1E1
+{
+Map "Brightmaps/Arachnobaron/BMARBRB1"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRB2B8
+{
+Map "Brightmaps/Arachnobaron/BMARBRB2"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRB3B7
+{
+Map "Brightmaps/Arachnobaron/BMARBRB3"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRB4B6
+{
+Map "Brightmaps/Arachnobaron/BMARBRB4"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRC1F1
+{
+Map "Brightmaps/Arachnobaron/BMARBRC1"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRC2C8
+{
+Map "Brightmaps/Arachnobaron/BMARBRC2"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRC3C7
+{
+Map "Brightmaps/Arachnobaron/BMARBRC3"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRC4C6
+{
+Map "Brightmaps/Arachnobaron/BMARBRC4"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRC5F5
+{
+Map "Brightmaps/Arachnobaron/BMARBRC5"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRD2D8
+{
+Map "Brightmaps/Arachnobaron/BMARBRD2"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRD3D7
+{
+Map "Brightmaps/Arachnobaron/BMARBRD3"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRD4D6
+{
+Map "Brightmaps/Arachnobaron/BMARBRD4"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRE2E8
+{
+Map "Brightmaps/Arachnobaron/BMARBRE2"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRE3E7
+{
+Map "Brightmaps/Arachnobaron/BMARBRE3"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRE4E6
+{
+Map "Brightmaps/Arachnobaron/BMARBRE4"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRF2F8
+{
+Map "Brightmaps/Arachnobaron/BMARBRF2"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRF3F7
+{
+Map "Brightmaps/Arachnobaron/BMARBRF3"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRF4F6
+{
+Map "Brightmaps/Arachnobaron/BMARBRF4"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRG1
+{
+Map "Brightmaps/Arachnobaron/BMARBRG1"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRG2G8
+{
+Map "Brightmaps/Arachnobaron/BMARBRG2"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRG3G7
+{
+Map "Brightmaps/Arachnobaron/BMARBRG3"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRG4G6
+{
+Map "Brightmaps/Arachnobaron/BMARBRG4"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRG5
+{
+Map "Brightmaps/Arachnobaron/BMARBRG5"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRH1
+{
+Map "Brightmaps/Arachnobaron/BMARBRH1"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRH2H8
+{
+Map "Brightmaps/Arachnobaron/BMARBRH2"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRH3H7
+{
+Map "Brightmaps/Arachnobaron/BMARBRH3"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRH4H6
+{
+Map "Brightmaps/Arachnobaron/BMARBRH4"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRH5
+{
+Map "Brightmaps/Arachnobaron/BMARBRH5"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRJ0
+{
+Map "Brightmaps/Arachnobaron/BMARBRJ0"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRK0
+{
+Map "Brightmaps/Arachnobaron/BMARBRK0"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRL0
+{
+Map "Brightmaps/Arachnobaron/BMARBRL0"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRM0
+{
+Map "Brightmaps/Arachnobaron/BMARBRM0"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRP1
+{
+Map "Brightmaps/Arachnobaron/BMARBRP1"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRP2
+{
+Map "Brightmaps/Arachnobaron/BMARBRP2"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRP3
+{
+Map "Brightmaps/Arachnobaron/BMARBRP3"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRP4
+{
+Map "Brightmaps/Arachnobaron/BMARBRP4"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRP5
+{
+Map "Brightmaps/Arachnobaron/BMARBRP5"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRP6
+{
+Map "Brightmaps/Arachnobaron/BMARBRP6"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRP7
+{
+Map "Brightmaps/Arachnobaron/BMARBRP7"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRP8
+{
+Map "Brightmaps/Arachnobaron/BMARBRP8"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRQ1
+{
+Map "Brightmaps/Arachnobaron/BMARBRQ1"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRQ2
+{
+Map "Brightmaps/Arachnobaron/BMARBRQ2"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRQ3
+{
+Map "Brightmaps/Arachnobaron/BMARBRQ3"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRQ4
+{
+Map "Brightmaps/Arachnobaron/BMARBRQ4"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRQ5
+{
+Map "Brightmaps/Arachnobaron/BMARBRQ5"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRQ6
+{
+Map "Brightmaps/Arachnobaron/BMARBRQ6"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRQ7
+{
+Map "Brightmaps/Arachnobaron/BMARBRQ7"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRQ8
+{
+Map "Brightmaps/Arachnobaron/BMARBRQ8"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRR1
+{
+Map "Brightmaps/Arachnobaron/BMARBRR1"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRR2
+{
+Map "Brightmaps/Arachnobaron/BMARBRR2"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRR3
+{
+Map "Brightmaps/Arachnobaron/BMARBRR3"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRR4
+{
+Map "Brightmaps/Arachnobaron/BMARBRR4"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRR5
+{
+Map "Brightmaps/Arachnobaron/BMARBRR5"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRR6
+{
+Map "Brightmaps/Arachnobaron/BMARBRR6"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRR7
+{
+Map "Brightmaps/Arachnobaron/BMARBRR7"
+DisableFullBright
+}
+
+BrightMap Sprite ARBRR8
+{
+Map "Brightmaps/Arachnobaron/BMARBRR8"
+DisableFullBright
+}

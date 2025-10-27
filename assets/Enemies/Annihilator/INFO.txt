@@ -1,0 +1,15 @@
+Name: Annihilator
+Difficulty: Very Hard
+Connection: None
+Summon: Annihilator
+Melee: No
+Distance: Projectile
+Type: Demon, Cybernetic
+Brightmaps: Yes
+Actor modification: No
+ACS: No
+
+
+A very powerful upgraded Cyberdemon that fires two rockets at a time. Additionally, it has a chance
+to fire two faster, homing rockets as well. A simple but difficult challenge for a player, but can
+get unfair.

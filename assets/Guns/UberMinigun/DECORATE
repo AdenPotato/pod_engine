@@ -1,0 +1,49 @@
+ACTOR UberMinigun : Weapon
+{
+    Inventory.PickupMessage "You got the UberMinigun!"
+    Inventory.PickupSound "misc/w_pkup"
+    Weapon.SlotNumber 4
+	Weapon.SelectionOrder 400
+    Weapon.Kickback 90
+    Weapon.AmmoType "Clip"
+    Weapon.AmmoGive 50
+    Weapon.AmmoUse 1
+    Obituary "%k turned %o into swiss cheese with %p Uberminigun"
+	Scale 0.8
+	Decal "BulletChip"
+    States
+    {
+    Spawn:
+       MINI A -1
+       LOOP
+    Ready:
+       MING A 9 A_WeaponReady
+       Loop
+    Deselect:
+	   MING A 0 A_StopSound(7)
+	   MING A 1 A_Lower
+       Wait
+    Select: 
+       MING A 1 A_Raise
+       LOOP
+    Fire:
+       MING A 0 A_PlaySound("weapons/minigunup",7)
+       MING BCDEFGH 2 
+       MING CEGABCDEFGHACEGE 1 
+    Hold:
+       MINF A 0 A_GunFlash
+	   MINF A 0 A_PlaySound("weapons/minigun",CHAN_WEAPON)
+	   MINF A 0 A_PlaySound("weapons/minigunhold",7,1.0,true)
+       MINF A 1 BRIGHT A_FireBullets (5.6, 0, 2, 5, "BulletPuff")
+	   //MINF A 0 A_PlayweaponSound("weapons/minigun")
+       MINF C 1 BRIGHT //A_FireBullets (5.6, 0, 2, 5, "BulletPuff")
+	   //MINF A 0 A_PlayweaponSound("weapons/minigun")
+       MINF B 1 BRIGHT //A_FireBullets (5.6, 0, 2, 5, "BulletPuff")
+       MING C 0 A_ReFire
+	   MING C 0 A_StopSound(7)
+       MING A 0 A_PlaySound("weapons/minigundown",CHAN_WEAPON)
+       MING ACEGABCDEFGHABCDEFGH 1
+	   MING ABCDEFGH 2
+       Goto Ready
+    }
+}

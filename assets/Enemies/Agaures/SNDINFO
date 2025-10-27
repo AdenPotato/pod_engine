@@ -1,0 +1,10 @@
+$RANDOM agaures/sight { agaures/sight1 agaures/sight2 }
+agaures/sight1 		AGURSIT1
+agaures/sight2 		AGURSIT2
+agaures/pain		AGURPAIN
+$RANDOM agaures/death { agaures/death1 agaures/death2 }
+agaures/death1 		AGURDTH1
+agaures/death2 		AGURDTH2
+agaures/active		AGURACTV
+agaures/scratch		AGURHITS
+agaures/swing		AGURSWNG

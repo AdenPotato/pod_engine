@@ -1,0 +1,5 @@
+Code: Jimmy, Ghastly Dragon (ZScript conversion)
+GLDefs: Ghastly Dragon, Sandypaper (Brightmaps)
+Sounds: Id Software
+Sprites: Id Software, Eriance (Projectiles), Vader (Projectiles)
+Sprite Edit: Jimmy

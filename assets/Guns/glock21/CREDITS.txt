@@ -1,0 +1,6 @@
+Submitted: HawkwithGlock
+Decorate: HawkwithGlock, Gothic
+GLDefs: N\A
+Sounds: Ubisoft
+Sprites: TorridGristle, Capcom
+Sprite Edit: HawkwithGlock, Gothic

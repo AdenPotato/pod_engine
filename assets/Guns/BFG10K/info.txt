@@ -1,0 +1,11 @@
+Name: BFG10K
+Class: 7
+Type: Hitscan
+Palette: Doom
+Summon: STBFG10K
+Ammo Type: Cell
+Altfire: No
+Powered Mode: No
+Brightmaps: No
+Actor modification: No
+ACS: No

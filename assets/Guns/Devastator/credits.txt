@@ -1,0 +1,7 @@
+Submitted: BFGMajorMike
+Code: Amuscaria, Gothic
+GLDefs: Gothic
+Sounds: Doom 3, Doom 64, Strife, Amuscaria
+Sprites: SoniK.O.Fan, Amuscaria, Doom, Strife
+Sprite Edit: Amuscaria
+Idea Base: The Devastator from Demon Eclipse and Stronghold

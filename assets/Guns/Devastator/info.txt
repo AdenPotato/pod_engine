@@ -1,0 +1,11 @@
+Name: Devastator
+Class: 7
+Type: Projectile, Melee
+Palette: Doom
+Summon: Devastator
+Ammo Type: Cell
+Altfire: No
+Powered Mode: No
+Brightmaps: No
+Actor modification: No
+ACS: No

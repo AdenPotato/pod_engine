@@ -1,0 +1,187 @@
+Pointlight AgauresBall
+{
+Color 1.0 0.0 0.0
+Size 25
+}
+
+Pointlight AgauresBall2
+{
+Color 1.0 0.0 0.0
+Size 30
+}
+
+Pointlight AgauresBall3
+{
+Color 0.7 0.0 0.0
+Size 25
+}
+
+Pointlight AgauresBall4
+{
+Color 0.4 0.0 0.0
+Size 20
+}
+
+Pointlight AgauresBall5
+{
+Color 0.2 0.0 0.0
+Size 15
+}
+
+Object AgauresBall
+{
+Frame BLVBA { Light AgauresBall }
+Frame BLVBB { Light AgauresBall }
+Frame BLVBC { Light AgauresBall2 }
+Frame BLVBD { Light AgauresBall3 }
+Frame BLVBE { Light AgauresBall4 }
+Frame BLVBF { Light AgauresBall5 }
+}
+
+Object SpeedyAgauresBall
+{
+Frame BLVBA { Light AgauresBall }
+Frame BLVBB { Light AgauresBall }
+Frame BLVBC { Light AgauresBall2 }
+Frame BLVBD { Light AgauresBall3 }
+Frame BLVBE { Light AgauresBall4 }
+Frame BLVBF { Light AgauresBall5 }
+}
+
+
+BrightMap Sprite AGURE1
+{
+Map "Brightmaps/Agaures/BMAGURE1"
+DisableFullBright
+}
+
+BrightMap Sprite AGURE2
+{
+Map "Brightmaps/Agaures/BMAGURE2"
+DisableFullBright
+}
+
+BrightMap Sprite AGURE3
+{
+Map "Brightmaps/Agaures/BMAGURE3"
+DisableFullBright
+}
+
+BrightMap Sprite AGURE4
+{
+Map "Brightmaps/Agaures/BMAGURE4"
+DisableFullBright
+}
+
+BrightMap Sprite AGURE5
+{
+Map "Brightmaps/Agaures/BMAGURE5"
+DisableFullBright
+}
+
+BrightMap Sprite AGURE6
+{
+Map "Brightmaps/Agaures/BMAGURE6"
+DisableFullBright
+}
+
+BrightMap Sprite AGURE7
+{
+Map "Brightmaps/Agaures/BMAGURE7"
+DisableFullBright
+}
+
+BrightMap Sprite AGURE8
+{
+Map "Brightmaps/Agaures/BMAGURE8"
+DisableFullBright
+}
+
+BrightMap Sprite AGURF1
+{
+Map "Brightmaps/Agaures/BMAGURF1"
+DisableFullBright
+}
+
+BrightMap Sprite AGURF2
+{
+Map "Brightmaps/Agaures/BMAGURF2"
+DisableFullBright
+}
+
+BrightMap Sprite AGURF3
+{
+Map "Brightmaps/Agaures/BMAGURF3"
+DisableFullBright
+}
+
+BrightMap Sprite AGURF4
+{
+Map "Brightmaps/Agaures/BMAGURF4"
+DisableFullBright
+}
+
+BrightMap Sprite AGURF5
+{
+Map "Brightmaps/Agaures/BMAGURF5"
+DisableFullBright
+}
+
+BrightMap Sprite AGURF6
+{
+Map "Brightmaps/Agaures/BMAGURF6"
+DisableFullBright
+}
+
+BrightMap Sprite AGURF7
+{
+Map "Brightmaps/Agaures/BMAGURF7"
+DisableFullBright
+}
+
+BrightMap Sprite AGURF8
+{
+Map "Brightmaps/Agaures/BMAGURF8"
+DisableFullBright
+}
+
+BrightMap Sprite AGURG1
+{
+Map "Brightmaps/Agaures/BMAGURG1"
+DisableFullBright
+}
+
+BrightMap Sprite AGURG2
+{
+Map "Brightmaps/Agaures/BMAGURG2"
+DisableFullBright
+}
+
+BrightMap Sprite AGURG3
+{
+Map "Brightmaps/Agaures/BMAGURG3"
+DisableFullBright
+}
+
+BrightMap Sprite AGURG4
+{
+Map "Brightmaps/Agaures/BMAGURG4"
+DisableFullBright
+}
+BrightMap Sprite AGURG6
+{
+Map "Brightmaps/Agaures/BMAGURG6"
+DisableFullBright
+}
+
+BrightMap Sprite AGURG7
+{
+Map "Brightmaps/Agaures/BMAGURG7"
+DisableFullBright
+}
+
+BrightMap Sprite AGURG8
+{
+Map "Brightmaps/Agaures/BMAGURG8"
+DisableFullBright
+}

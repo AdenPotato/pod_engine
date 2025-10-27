@@ -1,0 +1,198 @@
+pointlight DEVBALL
+{
+	color 1.0 0.5 0.5
+	size 120
+	attenuate 1
+}
+
+flickerlight DEVBALL_X1
+{
+	color 1.0 0.5 0.5
+	size 120
+	secondarySize 132
+	chance 0.3
+	attenuate 1
+}
+
+flickerlight DEVBALL_X2
+{
+	color 1.0 0.6 0.6
+	size 156
+	secondarySize 168
+	chance 0.3
+	attenuate 1
+}
+
+flickerlight DEVBALL_X3
+{
+	color 1.0 0.7 0.7
+	size 180
+	secondarySize 192
+	chance 0.3
+	attenuate 1
+}
+
+flickerlight DEVBALL_X4
+{
+	color 0.7 0.4 0.4
+	size 84
+	secondarySize 96
+	chance 0.3
+	attenuate 1
+}
+
+flickerlight DEVBALL_X5
+{
+	color 0.3 0.1 0.1
+	size 72
+	secondarySize 84
+	chance 0.3
+	attenuate 1
+}
+
+object DevastatorBall
+{
+	frame DBALA { light DEVBALL }
+	frame DBALB { light DEVBALL }
+
+	frame DBALC { light DEVBALL_X1 }
+	frame DBALD { light DEVBALL_X2 }
+	frame DBALE { light DEVBALL_X3 }
+	frame DBALF { light DEVBALL_X1 }
+	frame DBALG { light DEVBALL_X4 }
+	frame DBALH { light DEVBALL_X5 }
+}
+
+pointlight DEVBALL2
+{
+	color 1.0 0.2 0.2
+	size 56
+	attenuate 1
+}
+
+flickerlight DEVBALL2_X1
+{
+	color 0.8 0.2 0.2
+	size 62
+	secondarySize 70
+	chance 0.25
+	attenuate 1
+}
+
+flickerlight DEVBALL2_X2
+{
+	color 0.6 0.2 0.2
+	size 78
+	secondarySize 86
+	chance 0.25
+	attenuate 1
+}
+
+flickerlight DEVBALL2_X3
+{
+	color 0.2 0.1 0.1
+	size 94
+	secondarySize 102
+	chance 0.25
+	attenuate 1
+}
+
+object DevastatorBall2
+{
+	frame DBA2A { light DEVBALL2 }
+	frame DBA2B { light DEVBALL2 }
+	frame DBA2C { light DEVBALL2_X1 }
+	frame DBA2D { light DEVBALL2_X2 }
+	frame DBA2E { light DEVBALL2_X3 }
+}
+
+flickerlight DEVLIGHT
+{
+	color 1.0 0.3 0.3
+	size 92
+	secondarySize 98
+	chance 0.8
+	attenuate 1
+}
+
+flickerlight DEVLIGHT_X1
+{
+	color 1.0 0.3 0.3
+	size 80
+	secondarySize 86
+	chance 0.8
+	attenuate 1
+}
+
+flickerlight DEVLIGHT_X2
+{
+	color 1.0 0.3 0.3
+	size 68
+	secondarySize 74
+	chance 0.8
+	attenuate 1
+}
+
+flickerlight DEVLIGHT_X3
+{
+	color 1.0 0.3 0.3
+	size 56
+	secondarySize 62
+	chance 0.8
+	attenuate 1
+}
+
+flickerlight DEVLIGHT_X4
+{
+	color 0.9 0.2 0.2
+	size 44
+	secondarySize 50
+	chance 0.8
+	attenuate 1
+}
+
+flickerlight DEVLIGHT_X5
+{
+	color 0.9 0.2 0.2
+	size 32
+	secondarySize 38
+	chance 0.8
+	attenuate 1
+}
+
+flickerlight DEVLIGHT_X6
+{
+	color 0.8 0.1 0.1
+	size 20
+	secondarySize 26
+	chance 0.8
+	attenuate 1
+}
+
+object LiteShot
+{
+	frame DLITA { light DEVLIGHT }
+	frame DLITB { light DEVLIGHT }
+	frame DLITC { light DEVLIGHT }
+	frame DLITD { light DEVLIGHT }
+	frame DLITE { light DEVLIGHT }
+	frame DLITF { light DEVLIGHT }
+	frame DLITG { light DEVLIGHT }
+	frame DLITH { light DEVLIGHT }
+	frame DLITI { light DEVLIGHT_X1 }
+	frame DLITJ { light DEVLIGHT_X2 }
+	frame DLITK { light DEVLIGHT_X3 }
+	frame DLITL { light DEVLIGHT_X4 }
+	frame DLITM { light DEVLIGHT_X5 }
+	frame DLITN { light DEVLIGHT_X6 }
+}
+
+object DevPuff
+{
+	frame DLITI { light DEVLIGHT_X1 }
+	frame DLITJ { light DEVLIGHT_X2 }
+	frame DLITK { light DEVLIGHT_X3 }
+	frame DLITL { light DEVLIGHT_X4 }
+	frame DLITM { light DEVLIGHT_X5 }
+	frame DLITN { light DEVLIGHT_X6 }
+}

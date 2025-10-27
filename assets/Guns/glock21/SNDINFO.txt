@@ -1,0 +1,6 @@
+//Glock 21
+weapons/glockup GLOKUP
+weapons/glockfire GLOKFIRE
+weapons/glockdry GLOKDRY
+weapons/glockout GLOKOUT
+weapons/glockin	GLOKIN

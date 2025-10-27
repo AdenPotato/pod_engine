@@ -1,0 +1,236 @@
+
+//Dynamic Lights
+
+Pointlight AgathoBall1
+{
+Color 1.0 0.4 0.4
+Size 48
+}
+
+Pointlight AgathoBall2
+{
+Color 0.8 0.2 0.2
+Size 48
+}
+
+Pointlight AgathoBall3
+{
+Color 0.8 0.2 0.2
+Size 64
+}
+
+Pointlight AgathoBall4
+{
+Color 0.6 0.0 0.0
+Size 56
+}
+
+Pointlight AgathoBall5
+{
+Color 0.5 0.0 0.0
+Size 56
+}
+
+Pointlight AgathoBall6
+{
+Color 0.5 0.0 0.0
+Size 48
+}
+
+Pointlight AgathoBall6
+{
+Color 0.4 0.0 0.0
+Size 32
+}
+
+Object AgathoDemonFireball
+{
+Frame TNT1A { Light AgathoBall1 }
+Frame AGFXG { Light AgathoBall2 }
+Frame AGFXH { Light AgathoBall3 }
+Frame AGFXI { Light AgathoBall4 }
+Frame AGFXJ { Light AgathoBall5 }
+Frame AGFXK { Light AgathoBall6 }
+Frame AGFXL { Light AgathoBall7 }
+}
+
+Pointlight AgathoTracer1
+{
+Color 0.8 0.0 0.0
+Size 48
+}
+
+Pointlight AgathoTracer2
+{
+Color 1.0 0.0 0.0
+Size 64
+}
+
+Pointlight AgathoTracer3
+{
+Color 0.8 0.0 0.0
+Size 56
+}
+
+Pointlight AgathoTracer4
+{
+Color 0.4 0.0 0.0
+Size 48
+}
+
+Pointlight AgathoTracer5
+{
+Color 0.4 0.0 0.0
+Size 40
+}
+
+Object AgathoDemonTracer
+{
+Frame AGFBA { Light AgathoTracer1 }
+Frame AGFBB { Light AgathoTracer1 }
+Frame AGFBC { Light AgathoTracer1 }
+Frame AGFBD { Light AgathoTracer2 }
+Frame AGFBE { Light AgathoTracer3 }
+Frame AGFBF { Light AgathoTracer4 }
+Frame AGFBG { Light AgathoTracer5 }
+}
+
+//Brightmaps
+
+BrightMap Sprite AGAHA1
+{
+Map BMAGAHA1
+DisableFullBright
+}
+
+BrightMap Sprite AGAHA2A8
+{
+Map BMAGAHA2
+DisableFullBright
+}
+
+BrightMap Sprite AGAHA3A7
+{
+Map BMAGAHA3
+DisableFullBright
+}
+
+BrightMap Sprite AGAHB1
+{
+Map BMAGAHB1
+DisableFullBright
+}
+
+BrightMap Sprite AGAHB2B8
+{
+Map BMAGAHB2
+DisableFullBright
+}
+
+BrightMap Sprite AGAHB3B7
+{
+Map BMAGAHB3
+DisableFullBright
+}
+
+BrightMap Sprite AGAHB4B6
+{
+Map BMAGAHB4
+DisableFullBright
+}
+
+BrightMap Sprite AGAHB5
+{
+Map BMAGAHB5
+DisableFullBright
+}
+
+BrightMap Sprite AGAHC1
+{
+Map BMAGAHC1
+DisableFullBright
+}
+
+BrightMap Sprite AGAHC2C8
+{
+Map BMAGAHC2
+DisableFullBright
+}
+
+BrightMap Sprite AGAHC3C7
+{
+Map BMAGAHC3
+DisableFullBright
+}
+
+BrightMap Sprite AGAHC4C6
+{
+Map BMAGAHC4
+DisableFullBright
+}
+
+BrightMap Sprite AGAHC5
+{
+Map BMAGAHC5
+DisableFullBright
+}
+
+BrightMap Sprite AGAHD1
+{
+Map BMAGAHD1
+DisableFullBright
+}
+
+BrightMap Sprite AGAHD2D8
+{
+Map BMAGAHD2
+DisableFullBright
+}
+
+BrightMap Sprite AGAHD3D7
+{
+Map BMAGAHD3
+DisableFullBright
+}
+
+BrightMap Sprite AGAHE1
+{
+Map BMAGAHE1
+DisableFullBright
+}
+
+BrightMap Sprite AGAHE2E8
+{
+Map BMAGAHE2
+DisableFullBright
+}
+
+BrightMap Sprite AGAHE3E7
+{
+Map BMAGAHE3
+DisableFullBright
+}
+
+BrightMap Sprite AGAHF1
+{
+Map BMAGAHF1
+DisableFullBright
+}
+
+BrightMap Sprite AGAHF2F8
+{
+Map BMAGAHF2
+DisableFullBright
+}
+
+BrightMap Sprite AGAHF3F7
+{
+Map BMAGAHF3
+DisableFullBright
+}
+
+BrightMap Sprite AGAHG0
+{
+Map BMAGAHG0
+DisableFullBright
+}

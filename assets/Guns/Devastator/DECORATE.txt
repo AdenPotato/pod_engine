@@ -1,0 +1,207 @@
+Actor Devastator : Weapon
+{
+Inventory.PickupMessage "You got the Devastator! Hell yeah!"
+Obituary "%o was disintergrated by %k's Devastator."
+Weapon.AmmoType "Cell"
+Weapon.AmmoGive 50
+Weapon.AmmoUse 50
+Weapon.SlotNumber 7
+Tag "Devastator"
++WEAPON.EXPLOSIVE
++WEAPON.BFG
++WEAPON.NOAUTOFIRE
+States
+	{
+	Spawn:
+		WDEV A -1
+		Loop
+	Ready:
+		DEVG A 2 A_WeaponReady
+		Loop
+	Deselect:
+		DEVG A 1 A_Lower
+		Loop
+	Select:
+		DEVG A 1 A_Raise
+		Loop
+	Fire:
+		DEVG A 12 A_StartSound("weapons/devchr",1)
+		DEVG BCDE 12 Bright
+		DEVG F 4 Bright
+		DEVG J 0 A_Refire
+		DEVG J 5 Bright { A_GunFlash; A_StartSound("weapons/devfir",7); }
+		DEVG K 4 Bright A_FireProjectile("DevastatorBall",0,1,0,0)
+		DEVG LM 4 Bright
+		DEVG A 9
+		Goto Ready
+	Hold:
+		DEVG G 4 Bright { A_FireBullets(4,4,2,3,"DevPuff",FBF_NOFLASH,64); A_StartSound("weapons/devfch",1); }
+		DEVG HIGHI 4 Bright A_FireBullets(4,4,2,3,"DevPuff",FBF_NOFLASH,64)
+		DEVG J 0 A_Refire
+		DEVG J 5 Bright { A_GunFlash; A_StartSound("weapons/devfir",7); }
+		DEVG K 4 Bright A_FireProjectile("DevastatorBall",0,1,0,0)
+		DEVG LM 4 Bright
+		DEVG A 9
+		Goto Ready
+	Flash:
+		TNT1 A 5 A_Light1
+		TNT1 A 7 A_Light2
+		TNT1 A 7 A_Light1
+		TNT1 A 1 A_Light0
+		stop
+	}
+}
+
+Actor DevastatorBall
+{
+Projectile
+Radius 12
+Height 8
+Speed 30
+Damage 100
+Renderstyle Add
+Alpha 0.90
++FORCERADIUSDMG
++FORCEXYBILLBOARD
+DeathSound "weapons/devexp"
+Obituary "%o was disintergrated by %k's Devastator."
+var int user_i;
+States
+	{
+	Spawn:
+		DBAL AB 4 Bright 
+		DBAL AABB 2 Bright { A_Explode(128,128,0); A_SpawnItemEx("DevShooter",16,0,0,0,0,0,random(0,359),SXF_TRANSFERPOINTERS); }
+		Goto Spawn+2
+	Death:
+		DBAL C 5 Bright 
+		DBAL D 5 Bright 
+		DBAL E 5 Bright
+			{
+			for(A_SetUserVar(user_i,0); user_i<343; A_SetUserVar(user_i,user_i+18))
+				{
+				A_SpawnProjectile("DevastatorBall2",0,0,user_i,CMF_AIMDIRECTION|CMF_TRACKOWNER);
+				}
+			A_Explode(360,256);
+			}
+		DBAL FG 5 Bright A_Explode(360,256)
+		DBAL HI 3 Bright
+		stop
+	}
+}
+
+Actor DevastatorBall2
+{
+Projectile
+Radius 8
+Height 8
+Speed 10
+Damage 10
+Renderstyle Add
+Alpha 0.90
+SeeSound "weapons/devbal"
+DeathSound "weapons/devex2"
++FORCEXYBILLBOARD
+States
+	{
+	Spawn:
+		DBA2 AB 4 Bright
+		Loop
+	Death:
+		DBA2 C 4 Bright A_Explode(64,64,0)
+		DBA2 DE 4 Bright
+		Stop
+	}
+}
+
+Actor DevShooter
+{
+Projectile
+Radius 8
+Height 8
+Speed 0
++LOOKALLAROUND
++NOCLIP
++SEEKERMISSILE
+States
+	{
+	Spawn:
+	Missile:
+		TNT1 A 1 NoDelay { A_SeekerMissile(0,0,SMF_LOOK,256); A_SpawnProjectile("LiteShot",0,0,0,CMF_TRACKOWNER|CMF_CHECKTARGETDEAD,0,AAPTR_TRACER); }
+		Stop
+	See:
+		TNT1 A 1
+		Stop
+	}
+}
+
+Actor LiteShot : FastProjectile
+{
+Radius 8
+Height 12
+Speed 32
+Damage 8
+Renderstyle Add
+Alpha 0.85
+MissileType "LiteTrail"
+MissileHeight 8
+SeeSound "weapons/devlit"
+DeathSound "weapons/devzap"
+Scale 0.5
++RIPPER
++BLOODLESSIMPACT
+States
+	{
+	Spawn:
+		DLIT AABBCC 1 Bright
+		Loop
+	Death:
+		TNT1 A 0 A_SetScale(1.0)
+		DLIT DEFGHIJKLMN 1 Bright
+		Stop
+	}
+}
+
+Actor LiteTrail
+{
++NOINTERACTION
+Renderstyle Add
+Scale 0.5
+Alpha 0.85
+States
+	{
+	Spawn:
+		TNT1 A 0 Nodelay A_Jump(256,"s1","s2","s3")
+	s1:
+		DLIT ABCA 2 Bright A_SetScale(scalex-0.1,scaley-0.1)
+		Stop
+	s2:
+		DLIT BCAB 2 Bright A_SetScale(scalex-0.1,scaley-0.1)
+		Stop
+	s3:
+		DLIT CABC 2 Bright A_SetScale(scalex-0.1,scaley-0.1)
+		Stop
+	}
+}
+
+Actor DevPuff
+{
+Radius 3
+Height 3
+Renderstyle Add
+Alpha 0.75
+Seesound "weapons/devbuzz"
++ALWAYSPUFF
++PUFFONACTORS
++NOGRAVITY
++FORCEXYBILLBOARD
++PAINLESS
+States
+	{
+	Spawn:
+		DLIT IJKLMN 3 Bright
+		Stop
+	Crash:
+		TNT1 A 1
+		Stop
+	}
+}

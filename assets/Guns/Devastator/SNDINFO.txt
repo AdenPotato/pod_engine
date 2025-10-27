@@ -1,0 +1,13 @@
+weapons/devfir dsdevfir
+weapons/devbal dsdevbal
+$limit weapons/devbal 0
+$volume weapons/devbal 0.1
+weapons/devexp dsdevexp
+weapons/devex2 dsdevex2
+weapons/devlit dsdevlit
+weapons/devzap dsdevzap
+weapons/devchr dsdevchr
+weapons/devfch dsdevfch
+weapons/devbuzz DSDEVZAW
+$limit weapons/devbuzz 0
+$volume weapons/devbuzz 0.3

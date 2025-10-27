@@ -1,0 +1,138 @@
+Class Annihilator : Actor
+{
+  Default
+  {
+    Obituary "The Cyber Annihilator blew %o away with its rockets.";
+    Health 7000;
+    Radius 40;
+    Height 110;
+    Mass 1000;
+    Speed 16;
+    PainChance 10;
+    SeeSound "monster/annsit";
+    PainSound "cyber/pain";
+    DeathSound "monster/anndth";
+    ActiveSound "cyber/active";
+    MONSTER;
+    +NOTARGET
+    +FLOORCLIP
+    +NORADIUSDMG
+    +BOSS
+    +MISSILEEVENMORE
+  }
+
+  States
+  {
+  Spawn:
+    ANNI AB 10 A_Look();
+    Loop;
+  See:
+    ANNI A 3 A_Playsound("monster/anhoof");
+    ANNI ABBCC 3 A_Chase();
+    ANNI D 3 A_Playsound("monster/anhoof");
+    ANNI D 3 A_Chase();
+    Loop;
+  Missile:
+    ANNI E 0 A_Jump (128, "HomingMissile");
+    ANNI E 6 A_FaceTarget();
+    ANNI F 12 Bright AnnihilatorRockets("Rocket2",40,27);
+    ANNI E 12 A_FaceTarget();
+    ANNI F 12 Bright AnnihilatorRockets("Rocket2",40,27);
+    ANNI E 12 A_FaceTarget();
+    ANNI F 12 Bright AnnihilatorRockets("Rocket2",40,27);
+    ANNI E 0 A_Jump (128, "HomingMissile");
+    Goto See;
+  HomingMissile:
+    ANNI E 6 A_FaceTarget();
+    ANNI F 12 Bright AnnihilatorRockets("HomRocket1",40,27);
+    ANNI E 12 A_FaceTarget();
+    ANNI F 12 Bright AnnihilatorRockets("HomRocket1",40,27);
+    ANNI E 12 A_FaceTarget();
+    ANNI F 12 Bright AnnihilatorRockets("HomRocket1",40,27);
+    Goto See;
+  Pain:
+    ANNI G 10 A_Pain();
+    Goto See;
+  Death:
+    ANNI H 10 Bright;
+    ANNI I 10 Bright A_Scream();
+    ANNI JKL 10 Bright;
+    ANNI M 10 Bright A_NoBlocking();
+    ANNI NO 10 Bright;
+    ANNI P 30;
+    ANNI P -1 A_BossDeath();
+    Stop;
+  }
+
+  void AnnihilatorRockets(Class<Actor> p, double height, double offset)
+  {
+    A_SpawnProjectile(p, height, offset, 0);
+    A_SpawnProjectile(p, height,-offset, 0);
+  }
+}
+
+Class Rocket2 : Actor
+{
+  Default
+  {
+    radius 11;
+    height 8;
+    speed 20;
+    damage 20;
+    seesound "weapons/rocklf";
+    deathsound "weapons/rocklx";
+    Decal "Scorch";
+    PROJECTILE;
+    +RANDOMIZE
+    +ROCKETTRAIL
+    +THRUGHOST
+  }
+
+  states
+  {
+  Spawn:
+    MISL A 1 bright;
+    loop;
+  Death:
+    MISL B 0 bright A_SetTranslucent (0.67,1);
+    MISL B 8 bright A_Explode();
+    MISL C 6 bright;
+    MISL D 4 bright;
+    stop;
+  }
+}
+
+Class HomRocket1 : Actor
+{
+  Default
+  {
+    Radius 8;
+    Height 11;
+    Speed 30;
+    Damage 10;
+    DeathSound "weapons/hrlexp";
+    SeeSound "weapons/hrlfir";
+    Decal "Scorch";
+    PROJECTILE;
+    +SeekerMissile
+    +Rockettrail
+    +THRUGHOST
+  }
+
+  States
+  {
+  Spawn:
+    HMIS A 4 Bright A_SeekerMissile (25,35);
+    HMIS A 4 Bright;
+  Fly:
+    HMIS A 2 Bright A_SeekerMissile (10,25);
+    HMIS A 2 Bright;
+    Loop;
+  Death:
+    BAL3 C 0 Bright A_SetTranslucent (0.67,1);
+    BAL3 C 8 Bright A_Explode(64, 96);
+    BAL3 DE 5 Bright;
+    stop;
+   }
+}
+
