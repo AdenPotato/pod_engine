@@ -105,6 +105,8 @@ set(ENGINE_SOURCES
     src/voxel/voxel_grid.cpp
     src/sprite/sprite.cpp
     src/sprite/billboard_renderer.cpp
+    src/entity/entity.cpp
+    src/entity/entity_manager.cpp
 )
 
 set(ENGINE_HEADERS
@@ -119,6 +121,10 @@ set(ENGINE_HEADERS
     src/voxel/voxel_grid.h
     src/sprite/sprite.h
     src/sprite/billboard_renderer.h
+    src/entity/component.h
+    src/entity/transform.h
+    src/entity/entity.h
+    src/entity/entity_manager.h
 )
 
 # Create executable
@@ -137,6 +143,7 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/src/imgui_layer
         ${CMAKE_CURRENT_SOURCE_DIR}/src/voxel
         ${CMAKE_CURRENT_SOURCE_DIR}/src/sprite
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/entity
         ${stb_SOURCE_DIR}
 )
 
