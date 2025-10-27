@@ -1,19 +1,10 @@
 #include "application.h"
 #include "billboard_renderer.h"
 #include "sprite.h"
+#include "components.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <imgui.h>
 #include <iostream>
-
-glm::mat4 Transform::getModelMatrix() const {
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, position);
-    model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-    model = glm::rotate(model, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-    model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-    model = glm::scale(model, scale);
-    return model;
-}
 
 Application::~Application() {
     // Destructor defined here so unique_ptr can delete forward-declared types
@@ -62,6 +53,23 @@ Application::Application(int width, int height, const std::string& title)
         std::cerr << "Failed to load test sprite!" << std::endl;
     }
 
+    // Create a test entity with EnTT
+    auto testEntity = m_registry.create();
+
+    // Add Transform component
+    auto& transform = m_registry.emplace<Transform>(testEntity);
+    transform.position = glm::vec3(0.0f, 1.0f, -3.0f);
+
+    // Add SpriteComponent
+    auto& spriteComp = m_registry.emplace<SpriteComponent>(testEntity);
+    spriteComp.sprite = m_testSprite.get();
+
+    // Add BillboardComponent
+    auto& billboardComp = m_registry.emplace<BillboardComponent>(testEntity);
+    billboardComp.mode = BillboardMode::YAxisLocked;
+    billboardComp.scale = 1.0f;
+
+    std::cout << "Created test entity with ID: " << static_cast<uint32_t>(testEntity) << std::endl;
     std::cout << "Camera starting position: (" << m_camera->Position.x << ", "
               << m_camera->Position.y << ", " << m_camera->Position.z << ")" << std::endl;
 }
@@ -165,15 +173,24 @@ void Application::render() {
                             m_window->getAspectRatio());
     }
 
-    // Render test billboard sprite at position (0, 1, -3) - 3 meters in front of spawn
-    if (m_testSprite && m_testSprite->isLoaded()) {
-        glm::vec3 spritePos(0.0f, 1.0f, -3.0f);
-        m_billboardRenderer->drawSprite(
-            m_testSprite.get(),
-            spritePos,
-            *m_camera,
-            m_window->getAspectRatio()
-        );
+    // Render all entities with sprites using EnTT view
+    auto view = m_registry.view<Transform, SpriteComponent, BillboardComponent>();
+    for (auto entity : view) {
+        auto& transform = view.get<Transform>(entity);
+        auto& sprite = view.get<SpriteComponent>(entity);
+        auto& billboard = view.get<BillboardComponent>(entity);
+
+        if (sprite.sprite && sprite.sprite->isLoaded()) {
+            m_billboardRenderer->drawSprite(
+                sprite.sprite,
+                transform.position,
+                *m_camera,
+                m_window->getAspectRatio(),
+                billboard.mode,
+                transform.scale,
+                sprite.color
+            );
+        }
     }
 }
 

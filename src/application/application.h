@@ -7,25 +7,13 @@
 #include "mesh.h"
 #include "texture.h"
 #include "imgui_layer.h"
+#include <entt/entt.hpp>
 #include <memory>
 #include <vector>
 
 // Forward declarations
 class BillboardRenderer;
 class Sprite;
-
-struct Transform {
-    glm::vec3 position;
-    glm::vec3 rotation;
-    glm::vec3 scale;
-
-    Transform(const glm::vec3& pos = glm::vec3(0.0f),
-              const glm::vec3& rot = glm::vec3(0.0f),
-              const glm::vec3& scl = glm::vec3(1.0f))
-        : position(pos), rotation(rot), scale(scl) {}
-
-    glm::mat4 getModelMatrix() const;
-};
 
 class Application {
 public:
@@ -41,6 +29,9 @@ private:
     std::unique_ptr<Camera> m_camera;
     std::unique_ptr<Shader> m_shader;
     std::unique_ptr<ImGuiLayer> m_imguiLayer;
+
+    // EnTT ECS registry
+    entt::registry m_registry;
 
     // Test level for Doom-style game
     std::unique_ptr<Mesh> m_testLevel;
