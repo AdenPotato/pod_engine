@@ -20,42 +20,34 @@ Application::Application(int width, int height, const std::string& title)
     , m_lastX(width / 2.0f)
     , m_lastY(height / 2.0f)
     , m_cursorLocked(true)
-    , m_tabKeyPressed(false)
-    , m_leftMousePressed(false)
-    , m_destructionRadius(1.2f) {
+    , m_tabKeyPressed(false) {
     init();
     m_window = std::make_unique<Window>(width, height, title);
     m_renderer = std::make_unique<Renderer>();
-    m_camera = std::make_unique<Camera>(glm::vec3(6.4f, 8.0f, 20.0f));
+
+    // Position camera at player eye level (1.7m) above ground plane at origin
+    m_camera = std::make_unique<Camera>(glm::vec3(0.0f, 1.7f, 0.0f));
+    m_camera->MovementSpeed = 5.0f;  // 5 m/s movement speed
+
     m_shader = std::make_unique<Shader>("shaders/basic.vert", "shaders/basic.frag");
     m_imguiLayer = std::make_unique<ImGuiLayer>();
 
-    // Initialize voxel system with higher resolution (128x128x128 for smaller voxels)
-    m_voxelGrid = std::make_unique<VoxelGrid>(128, 128, 128);
-    m_raymarchShader = std::make_unique<Shader>("shaders/voxel_raymarch.vert", "shaders/voxel_raymarch.frag");
-    m_teardownShader = std::make_unique<Shader>("shaders/voxel_teardown.comp");
-
-    // Create fullscreen quad for raymarching
-    std::vector<Vertex> quadVertices = {
-        {{-1.0f, -1.0f, 0.0f}, {}, {}, {}},
-        {{ 1.0f, -1.0f, 0.0f}, {}, {}, {}},
-        {{ 1.0f,  1.0f, 0.0f}, {}, {}, {}},
-        {{-1.0f,  1.0f, 0.0f}, {}, {}, {}}
-    };
-    std::vector<unsigned int> quadIndices = {0, 1, 2, 2, 3, 0};
-    m_fullscreenQuad = std::make_unique<Mesh>(quadVertices, quadIndices);
+    // Load prototype texture
+    m_prototypeTexture = std::make_unique<Texture>();
+    if (!m_prototypeTexture->loadFromFile("assets/textures/prototype_square.png", true)) {
+        std::cerr << "ERROR: Failed to load prototype texture!" << std::endl;
+    } else {
+        std::cout << "Texture loaded successfully: "
+                  << m_prototypeTexture->getWidth() << "x" << m_prototypeTexture->getHeight()
+                  << " (" << m_prototypeTexture->getChannels() << " channels)" << std::endl;
+    }
 
     setupCallbacks();
     m_imguiLayer->init(m_window->getHandle());
     createScene();
 
-    // Initialize voxel grid with test scene
-    m_voxelGrid->initialize();
-
     std::cout << "Camera starting position: (" << m_camera->Position.x << ", "
               << m_camera->Position.y << ", " << m_camera->Position.z << ")" << std::endl;
-    std::cout << "Voxel grid size: " << m_voxelGrid->getSizeX() << "x"
-              << m_voxelGrid->getSizeY() << "x" << m_voxelGrid->getSizeZ() << std::endl;
 }
 
 void Application::init() {
@@ -85,8 +77,26 @@ void Application::setupCallbacks() {
 }
 
 void Application::createScene() {
-    // Voxel scene is now created in VoxelGrid::initialize()
-    std::cout << "Voxel scene initialized" << std::endl;
+    // Create simple ground plane for testing
+    // 20x20m ground plane centered at origin
+    // Texture is 512x512 with 4x4 grid, so entire texture = 4x4 meters
+    // Therefore: UV scale = distance_in_meters / 4.0
+
+    std::vector<Vertex> vertices;
+    std::vector<unsigned int> indices;
+
+    // Ground plane (y = 0) - facing up
+    // 20m x 20m = 5 texture repeats (20 / 4 = 5)
+    vertices.push_back({{-10.0f, 0.0f, 10.0f}, {1.0f, 1.0f, 1.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 5.0f}});
+    vertices.push_back({{10.0f, 0.0f, 10.0f}, {1.0f, 1.0f, 1.0f}, {0.0f, 1.0f, 0.0f}, {5.0f, 5.0f}});
+    vertices.push_back({{10.0f, 0.0f, -10.0f}, {1.0f, 1.0f, 1.0f}, {0.0f, 1.0f, 0.0f}, {5.0f, 0.0f}});
+    vertices.push_back({{-10.0f, 0.0f, -10.0f}, {1.0f, 1.0f, 1.0f}, {0.0f, 1.0f, 0.0f}, {0.0f, 0.0f}});
+    indices.insert(indices.end(), {0, 1, 2, 2, 3, 0});
+
+    m_testLevel = std::make_unique<Mesh>(vertices, indices);
+
+    std::cout << "Test level created: 20x20m ground plane with " << vertices.size() << " vertices" << std::endl;
+    std::cout << "Texture scale: 512x512 texture with 4x4 grid = 4m per texture repeat" << std::endl;
 }
 
 void Application::run() {
@@ -120,53 +130,36 @@ void Application::update() {
 
     // Process input
     processInput();
-
-    // Handle voxel destruction
-    handleVoxelDestruction();
 }
 
 void Application::render() {
     m_renderer->clear();
 
-    // Disable depth test for fullscreen quad raymarching
-    glDisable(GL_DEPTH_TEST);
-
-    // Bind voxel SSBO
-    m_voxelGrid->bindSSBO(0);
-
-    // Render voxels using raymarching
-    m_raymarchShader->use();
-
-    // Set uniforms
-    glm::ivec3 gridSize = m_voxelGrid->getSize();
-    m_raymarchShader->setVec3("gridSize", glm::vec3(gridSize));
-    m_raymarchShader->setVec3("cameraPos", m_camera->Position);
-    m_raymarchShader->setFloat("voxelSize", 0.1f);  // Small voxels for Teardown-like appearance
-    m_raymarchShader->setMat4("view", m_camera->getViewMatrix());
-    m_raymarchShader->setMat4("projection", m_camera->getProjectionMatrix(m_window->getAspectRatio()));
-
-    // Draw fullscreen quad
-    glBindVertexArray(m_fullscreenQuad->getVAO());
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-    glBindVertexArray(0);
-
-    // Re-enable depth test
+    // Doom-style rendering
     glEnable(GL_DEPTH_TEST);
+
+    glm::mat4 model = glm::mat4(1.0f);  // Identity matrix for level
+
+    // Render test level with texture
+    if (m_prototypeTexture && m_prototypeTexture->isLoaded()) {
+        m_renderer->drawMesh(*m_testLevel, *m_shader, model, *m_camera,
+                            m_window->getAspectRatio(), m_prototypeTexture.get());
+    } else {
+        m_renderer->drawMesh(*m_testLevel, *m_shader, model, *m_camera,
+                            m_window->getAspectRatio());
+    }
 }
 
 void Application::renderUI() {
-    // ImGui Demo Window (for reference)
-    // ImGui::ShowDemoWindow();
-
     // Engine stats window
-    ImGui::Begin("Voxel Teardown System");
+    ImGui::Begin("Pod Engine - Doom Looter Shooter");
 
     // Cursor mode indicator
     if (m_cursorLocked) {
-        ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "Camera Control Mode");
+        ImGui::TextColored(ImVec4(0.0f, 1.0f, 0.0f, 1.0f), "FPS Control Mode");
         ImGui::Text("Press TAB to unlock cursor");
     } else {
-        ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "UI Interaction Mode");
+        ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "UI Mode");
         ImGui::Text("Press TAB to lock cursor");
     }
     ImGui::Separator();
@@ -175,31 +168,27 @@ void Application::renderUI() {
     ImGui::Text("Frame Time: %.3f ms", m_deltaTime * 1000.0f);
     ImGui::Separator();
 
-    ImGui::Text("Camera Position");
+    ImGui::Text("Player Position");
     ImGui::Text("X: %.2f, Y: %.2f, Z: %.2f",
                 m_camera->Position.x,
                 m_camera->Position.y,
                 m_camera->Position.z);
+    ImGui::Text("Yaw: %.1f, Pitch: %.1f", m_camera->Yaw, m_camera->Pitch);
     ImGui::Separator();
-
-    ImGui::Text("Voxel Grid: %dx%dx%d",
-                m_voxelGrid->getSizeX(),
-                m_voxelGrid->getSizeY(),
-                m_voxelGrid->getSizeZ());
-    ImGui::Text("Total Voxels: %d", m_voxelGrid->getVoxelCount());
-    ImGui::Separator();
-
-    ImGui::Text("Destruction Settings");
-    ImGui::SliderFloat("Radius", &m_destructionRadius, 0.4f, 4.0f);
 
     if (ImGui::CollapsingHeader("Controls")) {
         ImGui::BulletText("TAB - Toggle cursor lock");
-        ImGui::BulletText("WASD - Move camera (when locked)");
-        ImGui::BulletText("Space - Move up (when locked)");
-        ImGui::BulletText("Shift - Move down (when locked)");
-        ImGui::BulletText("Mouse - Look around (when locked)");
-        ImGui::BulletText("Left Click - Destroy voxels (when locked)");
+        ImGui::BulletText("WASD - Move (5 m/s)");
+        ImGui::BulletText("Space - Move up");
+        ImGui::BulletText("Shift - Move down");
+        ImGui::BulletText("Mouse - Look around");
         ImGui::BulletText("ESC - Exit");
+    }
+
+    if (ImGui::CollapsingHeader("Level Info")) {
+        ImGui::Text("Test Level: 10x10x3m room");
+        ImGui::Text("Texture: prototype_square.png");
+        ImGui::Text("Scale: 512x512px = 1x1m");
     }
 
     ImGui::End();
@@ -276,117 +265,4 @@ void Application::onMouseScroll(double xoffset, double yoffset) {
     }
 
     m_camera->processMouseScroll(static_cast<float>(yoffset));
-}
-// Temporary file - will append this to application.cpp
-void Application::handleVoxelDestruction() {
-    // Only allow destruction when cursor is locked
-    if (!m_cursorLocked) {
-        return;
-    }
-
-    // Check for left mouse button click (edge-triggered)
-    bool leftMouseCurrentlyPressed = glfwGetMouseButton(m_window->getHandle(), GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS;
-
-    if (leftMouseCurrentlyPressed && !m_leftMousePressed) {
-        // Mouse button just pressed - perform destruction
-
-        // Calculate ray from camera
-        glm::vec3 rayOrigin = m_camera->Position;
-        glm::vec3 rayDir = m_camera->Front;
-
-        // Raycast to find intersection point with voxel grid
-        // We'll shoot a ray and find where it first hits a solid voxel
-
-        float voxelSize = 0.1f;  // Must match the voxelSize in render()
-        glm::vec3 gridMin = glm::vec3(0.0f);
-        glm::vec3 gridMax = glm::vec3(m_voxelGrid->getSize()) * voxelSize;
-
-        // Ray-box intersection with grid bounds
-        glm::vec3 tMin = (gridMin - rayOrigin) / rayDir;
-        glm::vec3 tMax = (gridMax - rayOrigin) / rayDir;
-        glm::vec3 t1 = glm::min(tMin, tMax);
-        glm::vec3 t2 = glm::max(tMin, tMax);
-        float tNear = glm::max(glm::max(t1.x, t1.y), t1.z);
-        float tFar = glm::min(glm::min(t2.x, t2.y), t2.z);
-
-        if (tNear <= tFar && tFar >= 0.0f) {
-            // Ray intersects grid - march through voxels to find first solid voxel
-            float t = glm::max(tNear, 0.0f);
-            glm::vec3 pos = rayOrigin + rayDir * t;
-
-            // DDA traversal
-            glm::ivec3 voxelCoord = glm::ivec3(glm::floor(pos / voxelSize));
-            glm::vec3 deltaDist = glm::abs(glm::vec3(voxelSize) / rayDir);
-            glm::ivec3 step = glm::ivec3(glm::sign(rayDir));
-            glm::vec3 sideDist = (glm::sign(rayDir) * (glm::vec3(voxelCoord) - pos / voxelSize) + (glm::sign(rayDir) * 0.5f) + 0.5f) * deltaDist;
-
-            const int maxSteps = 128;
-            bool foundVoxel = false;
-            glm::vec3 destructionCenter;
-
-            for (int i = 0; i < maxSteps; i++) {
-                // Check if current voxel is solid
-                if (voxelCoord.x >= 0 && voxelCoord.x < m_voxelGrid->getSizeX() &&
-                    voxelCoord.y >= 0 && voxelCoord.y < m_voxelGrid->getSizeY() &&
-                    voxelCoord.z >= 0 && voxelCoord.z < m_voxelGrid->getSizeZ()) {
-
-                    Voxel voxel = m_voxelGrid->getVoxel(voxelCoord.x, voxelCoord.y, voxelCoord.z);
-                    if (voxel.materialType != 0) {
-                        // Found solid voxel - set destruction center
-                        destructionCenter = glm::vec3(voxelCoord) + glm::vec3(0.5f);
-                        foundVoxel = true;
-                        break;
-                    }
-                } else {
-                    // Outside grid
-                    break;
-                }
-
-                // Step to next voxel
-                if (sideDist.x < sideDist.y) {
-                    if (sideDist.x < sideDist.z) {
-                        sideDist.x += deltaDist.x;
-                        voxelCoord.x += step.x;
-                    } else {
-                        sideDist.z += deltaDist.z;
-                        voxelCoord.z += step.z;
-                    }
-                } else {
-                    if (sideDist.y < sideDist.z) {
-                        sideDist.y += deltaDist.y;
-                        voxelCoord.y += step.y;
-                    } else {
-                        sideDist.z += deltaDist.z;
-                        voxelCoord.z += step.z;
-                    }
-                }
-            }
-
-            if (foundVoxel) {
-                std::cout << "Found target voxel at: (" << destructionCenter.x << ", "
-                          << destructionCenter.y << ", " << destructionCenter.z
-                          << ") with radius: " << m_destructionRadius << std::endl;
-
-                // Dispatch compute shader to destroy voxels
-                m_voxelGrid->bindSSBO(0);
-                m_teardownShader->use();
-                m_teardownShader->setVec3("gridSize", glm::vec3(m_voxelGrid->getSize()));
-                m_teardownShader->setVec3("destructionCenter", destructionCenter);
-                m_teardownShader->setFloat("destructionRadius", m_destructionRadius);
-                m_teardownShader->setInt("destructionType", 0);  // 0 = sphere
-
-                // Dispatch compute shader (128x128x128 grid with 8x8x8 work groups = 16x16x16 dispatches)
-                m_teardownShader->dispatch(16, 16, 16);
-
-                // Memory barrier to ensure compute shader finishes
-                glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
-
-                std::cout << "Compute shader dispatched successfully" << std::endl;
-            } else {
-                std::cout << "No voxel found in ray path" << std::endl;
-            }
-        }
-    }
-
-    m_leftMousePressed = leftMouseCurrentlyPressed;
 }

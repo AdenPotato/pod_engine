@@ -7,7 +7,6 @@
 #include "mesh.h"
 #include "texture.h"
 #include "imgui_layer.h"
-#include "voxel_grid.h"
 #include <memory>
 #include <vector>
 
@@ -39,14 +38,9 @@ private:
     std::unique_ptr<Shader> m_shader;
     std::unique_ptr<ImGuiLayer> m_imguiLayer;
 
-    // Voxel system
-    std::unique_ptr<VoxelGrid> m_voxelGrid;
-    std::unique_ptr<Shader> m_raymarchShader;
-    std::unique_ptr<Shader> m_teardownShader;
-    std::unique_ptr<Mesh> m_fullscreenQuad;
-
-    // Scene objects (legacy - will be removed)
-    std::vector<std::pair<Mesh, Transform>> m_sceneObjects;
+    // Test level for Doom-style game
+    std::unique_ptr<Mesh> m_testLevel;
+    std::unique_ptr<Texture> m_prototypeTexture;
 
     // Timing
     float m_deltaTime;
@@ -58,10 +52,6 @@ private:
     float m_lastY;
     bool m_cursorLocked;
     bool m_tabKeyPressed;  // Track TAB key state to prevent repeat toggles
-    bool m_leftMousePressed;  // Track left mouse button state
-
-    // Voxel interaction
-    float m_destructionRadius;
 
     // Methods
     void init();
@@ -76,7 +66,4 @@ private:
     void onFramebufferSize(int width, int height);
     void onMouseMove(double xpos, double ypos);
     void onMouseScroll(double xoffset, double yoffset);
-
-    // Voxel interaction
-    void handleVoxelDestruction();
 };

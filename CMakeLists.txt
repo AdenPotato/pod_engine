@@ -164,11 +164,18 @@ endif()
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/shaders
      DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-# Also copy shaders next to executable for multi-config generators (MSVC)
+# Copy assets to build directory
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+# Also copy shaders and assets next to executable for multi-config generators (MSVC)
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     ${CMAKE_CURRENT_SOURCE_DIR}/shaders
     $<TARGET_FILE_DIR:${PROJECT_NAME}>/shaders
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    ${CMAKE_CURRENT_SOURCE_DIR}/assets
+    $<TARGET_FILE_DIR:${PROJECT_NAME}>/assets
 )
 
 # Print configuration info
