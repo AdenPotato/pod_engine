@@ -4,6 +4,8 @@
 #include <vector>
 #include <algorithm>
 
+class Entity;
+
 class EntityManager {
 public:
     EntityManager();

@@ -16,7 +16,7 @@ Entity* EntityManager::createEntity() {
 
 void EntityManager::destroyEntity(Entity* entity) {
     if (entity) {
-        entity->destroy();
+        entity->~Entity();
         m_entitiesToDestroy.push_back(entity);
     }
 }

@@ -19,7 +19,7 @@ public:
     template<typename T, typename... Args>
     T* addComponent(Args&&... args);
 
-    template<typename T>
+    template<typename T>    
     T* getComponent();
 
     template<typename T>
