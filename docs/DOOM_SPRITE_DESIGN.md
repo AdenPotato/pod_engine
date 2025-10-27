@@ -1,12 +1,15 @@
-# Quake-Style Looter Shooter with Doom Sprites - Design Document
+# GZDoom-Style Looter Shooter - Design Document
 
 ## Project Overview
-Converting voxel engine to **Quake-style 3D looter shooter** with **Doom-style billboard sprites** for entities.
+Building a **GZDoom-style 3D looter shooter** from scratch in C++ with OpenGL.
 
-**Rendering Philosophy:**
-- **Levels:** Quake-style - True 3D geometry, textured polygons, proper lighting
-- **Entities:** Doom-style - Billboard sprites with 8-directional rotation
-- **Best of both worlds:** Modern 3D level design + retro sprite-based characters
+**Rendering Philosophy (GZDoom approach):**
+- **Levels:** True 3D geometry - Polygonal meshes, textured surfaces, no sector limitations
+- **Entities:** Doom-style billboard sprites - 8-directional rotation, variable sizes
+- **Movement:** Full 3D - Look up/down, jump, crouch (like GZDoom, not vanilla Doom)
+- **Feel:** Classic Doom aesthetic with modern 3D engine capabilities
+
+**Think:** GZDoom's rendering + looter-shooter mechanics (randomized weapons, loot drops, etc.)
 
 ---
 

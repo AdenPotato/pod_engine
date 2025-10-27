@@ -1,4 +1,6 @@
 #include "application.h"
+#include "billboard_renderer.h"
+#include "sprite.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <imgui.h>
 #include <iostream>
@@ -11,6 +13,10 @@ glm::mat4 Transform::getModelMatrix() const {
     model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
     model = glm::scale(model, scale);
     return model;
+}
+
+Application::~Application() {
+    // Destructor defined here so unique_ptr can delete forward-declared types
 }
 
 Application::Application(int width, int height, const std::string& title)
@@ -45,6 +51,16 @@ Application::Application(int width, int height, const std::string& title)
     setupCallbacks();
     m_imguiLayer->init(m_window->getHandle());
     createScene();
+
+    // Initialize billboard sprite system
+    m_billboardRenderer = std::make_unique<BillboardRenderer>();
+    m_billboardRenderer->init();
+
+    // Load a test sprite
+    m_testSprite = std::make_unique<Sprite>();
+    if (!m_testSprite->loadFromFile("assets/textures/prototype_square.png")) {
+        std::cerr << "Failed to load test sprite!" << std::endl;
+    }
 
     std::cout << "Camera starting position: (" << m_camera->Position.x << ", "
               << m_camera->Position.y << ", " << m_camera->Position.z << ")" << std::endl;
@@ -135,18 +151,29 @@ void Application::update() {
 void Application::render() {
     m_renderer->clear();
 
-    // Doom-style rendering
+    // Enable depth testing
     glEnable(GL_DEPTH_TEST);
 
     glm::mat4 model = glm::mat4(1.0f);  // Identity matrix for level
 
-    // Render test level with texture
+    // Render ground plane
     if (m_prototypeTexture && m_prototypeTexture->isLoaded()) {
         m_renderer->drawMesh(*m_testLevel, *m_shader, model, *m_camera,
                             m_window->getAspectRatio(), m_prototypeTexture.get());
     } else {
         m_renderer->drawMesh(*m_testLevel, *m_shader, model, *m_camera,
                             m_window->getAspectRatio());
+    }
+
+    // Render test billboard sprite at position (0, 1, -3) - 3 meters in front of spawn
+    if (m_testSprite && m_testSprite->isLoaded()) {
+        glm::vec3 spritePos(0.0f, 1.0f, -3.0f);
+        m_billboardRenderer->drawSprite(
+            m_testSprite.get(),
+            spritePos,
+            *m_camera,
+            m_window->getAspectRatio()
+        );
     }
 }
 

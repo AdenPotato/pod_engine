@@ -10,6 +10,10 @@
 #include <memory>
 #include <vector>
 
+// Forward declarations
+class BillboardRenderer;
+class Sprite;
+
 struct Transform {
     glm::vec3 position;
     glm::vec3 rotation;
@@ -26,7 +30,7 @@ struct Transform {
 class Application {
 public:
     Application(int width = 1280, int height = 720, const std::string& title = "Pod Engine");
-    ~Application() = default;
+    ~Application();  // Need to define in .cpp for forward-declared unique_ptr members
 
     void run();
 
@@ -41,6 +45,10 @@ private:
     // Test level for Doom-style game
     std::unique_ptr<Mesh> m_testLevel;
     std::unique_ptr<Texture> m_prototypeTexture;
+
+    // Billboard sprite system
+    std::unique_ptr<class BillboardRenderer> m_billboardRenderer;
+    std::unique_ptr<class Sprite> m_testSprite;
 
     // Timing
     float m_deltaTime;

@@ -103,6 +103,8 @@ set(ENGINE_SOURCES
     src/texture/texture.cpp
     src/imgui_layer/imgui_layer.cpp
     src/voxel/voxel_grid.cpp
+    src/sprite/sprite.cpp
+    src/sprite/billboard_renderer.cpp
 )
 
 set(ENGINE_HEADERS
@@ -115,6 +117,8 @@ set(ENGINE_HEADERS
     src/texture/texture.h
     src/imgui_layer/imgui_layer.h
     src/voxel/voxel_grid.h
+    src/sprite/sprite.h
+    src/sprite/billboard_renderer.h
 )
 
 # Create executable
@@ -132,6 +136,7 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/src/texture
         ${CMAKE_CURRENT_SOURCE_DIR}/src/imgui_layer
         ${CMAKE_CURRENT_SOURCE_DIR}/src/voxel
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/sprite
         ${stb_SOURCE_DIR}
 )
 
