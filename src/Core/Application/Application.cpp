@@ -48,7 +48,7 @@ void Application::run()
         //CORE_LOGGER_TRACE("{0}, {1}", x, y);
         if (Input::IsMouseButtonPressed(POD_MOUSE_BUTTON_LEFT))
         {
-            CORE_LOGGER_TRACE("MY BALLS ARE HUNGRY");
+            CORE_LOGGER_TRACE("LEFT BUTTON");
         }
 
 
