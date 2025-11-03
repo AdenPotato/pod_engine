@@ -20,3 +20,6 @@ compile_commands.json
 # Executables
 *.exe
 PathOfDoom
+/external/glad/src/glad.cZone.Identifier
+/external/glad/include/glad/glad.hZone.Identifier
+/external/glad/include/KHR/khrplatform.hZone.Identifier
